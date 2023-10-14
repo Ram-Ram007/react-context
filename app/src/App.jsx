@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "@picocss/pico";
+
+import { useState } from "react";
+
+import { ThemeProvider } from "./contexts/ThemeContext";
+
+import IndexPage from "./pages/IndexPage";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [name, setName] = useState("ram");
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <ThemeProvider>
+        <IndexPage />
+      </ThemeProvider>
+
+      {/* <NamePrinterP name={name} />
+      <NamePrinterH1 name={name} />
+
+      <NameChanger name={name} onNameChange={setName} /> */}
     </>
-  )
+  );
 }
 
-export default App
+function NamePrinterP(props) {
+  return <p>{props.name}</p>;
+}
+
+function NamePrinterH1(props) {
+  return <h1>{props.name}</h1>;
+}
+
+function NameChanger(props) {
+  const { onNameChange } = props;
+  const [newName, setNewName] = useState(props.name);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onNameChange(newName);
+    setNewName("");
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={newName}
+        onChange={(e) => setNewName(e.target.value)}
+      />
+      <input type="submit" />
+    </form>
+  );
+}
+
+export default App;
