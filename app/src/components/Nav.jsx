@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Avatar, Tooltip, Typography } from '@mui/material';
+import { Button, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import { ThemeDispatchContext } from '../contexts/ThemeContext';
 import { ThemeContext } from '../contexts/ThemeContext';
@@ -12,30 +12,40 @@ const Nav = () => {
     themeDispatch({ value: mode });
   }
 
+  const tooltip = (
+    <Tooltip id="tooltip">
+      {themeContext.user.name}
+    </Tooltip>
+  );
+
   return (
-    <nav className="container">
-      <ul>
-        <li>
-          <strong>Brand</strong>
-        </li>
-      </ul>
-      <ul>
-        <Tooltip title={themeContext.user.name}>
-          <Avatar
-            alt={themeContext.user.name}
-            src={themeContext.user.image}
-            sx={{ width: 62, height: 62 }}
-          />
-        </Tooltip>
-        <li>
-          {themeContext.value === 'light' ? (
-            <button onClick={() => handleClick('dark')}>🌙</button>
-          ) : (
-            <button onClick={() => handleClick('light')}>🌞</button>
-          )}
-        </li>
-      </ul>
-    </nav>
+    <Navbar className="container">
+      <Navbar.Brand>
+        <strong>Brand</strong>
+      </Navbar.Brand>
+      <Navbar.Collapse className="justify-content-end">
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <OverlayTrigger placement="top" overlay={tooltip}>
+              <span className="nav-link">
+                <img
+                  alt={themeContext.user.name}
+                  src={themeContext.user.image}
+                  style={{ width: 62, height: 62 }}
+                />
+              </span>
+            </OverlayTrigger>
+          </li>
+          <li className="nav-item">
+            {themeContext.value === 'light' ? (
+              <Button onClick={() => handleClick('dark')}>🌙</Button>
+            ) : (
+              <Button onClick={() => handleClick('light')}>🌞</Button>
+            )}
+          </li>
+        </ul>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 
