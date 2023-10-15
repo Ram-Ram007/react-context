@@ -12,6 +12,11 @@ function ThemeProvider({ children }) {
   const [theme, setTheme] = useState({
     value: "light",
     browser: "firefox",
+    user: {
+      name: "Ram",
+      image:
+        "https://static1.cbrimages.com/wordpress/wp-content/uploads/2020/06/itachi.jpg",
+    },
   });
 
   return (

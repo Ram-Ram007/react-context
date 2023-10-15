@@ -1,37 +1,37 @@
-import { useContext } from "react";
+import React, { useContext } from 'react';
+import { Avatar, Tooltip, Typography } from '@mui/material';
 
-import { ThemeDispatchContext } from "../contexts/ThemeContext";
-import { ThemeContext } from "../contexts/ThemeContext";
+import { ThemeDispatchContext } from '../contexts/ThemeContext';
+import { ThemeContext } from '../contexts/ThemeContext';
 
 const Nav = () => {
   const themeDispatch = useContext(ThemeDispatchContext);
   const themeContext = useContext(ThemeContext);
-  console.log(themeDispatch);
 
   function handleClick(mode) {
-    console.log({ value: mode });
     themeDispatch({ value: mode });
   }
 
   return (
-    <nav class="container">
+    <nav className="container">
       <ul>
         <li>
           <strong>Brand</strong>
         </li>
       </ul>
       <ul>
-        {/* <li>
-          <a href="#">Link</a>
-        </li>
+        <Tooltip title={themeContext.user.name}>
+          <Avatar
+            alt={themeContext.user.name}
+            src={themeContext.user.image}
+            sx={{ width: 62, height: 62 }}
+          />
+        </Tooltip>
         <li>
-          <a href="#">Link</a>
-        </li> */}
-        <li>
-          {themeContext.value === "light" ? (
-            <button onClick={() => handleClick("dark")}>🌙</button>
+          {themeContext.value === 'light' ? (
+            <button onClick={() => handleClick('dark')}>🌙</button>
           ) : (
-            <button onClick={() => handleClick("light")}>🌞</button>
+            <button onClick={() => handleClick('light')}>🌞</button>
           )}
         </li>
       </ul>
