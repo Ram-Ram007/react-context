@@ -31,7 +31,7 @@ const Nav = () => {
                 <img
                   alt={themeContext.user.name}
                   src={themeContext.user.image}
-                  style={{ width: 62, height: 62 }}
+                  style={{ width: 50, height: 50, borderRadius: '50%' }}
                 />
               </span>
             </OverlayTrigger>
